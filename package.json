@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "zip": "zip -r deployment-package.zip index.mjs node_modules"
+    "build": "tsc",
+    "zip": "zip -r deployment-package.zip dist node_modules"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +14,9 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.946.0",
     "@aws-sdk/lib-dynamodb": "^3.946.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.159",
+    "typescript": "^5.9.3"
   }
 }
