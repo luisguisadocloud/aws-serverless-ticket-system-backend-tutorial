@@ -5,6 +5,15 @@ set -e
 FUNCTION_NAME="dev-tsb-lmb-crud"
 REGION="us-east-1"
 
+echo "🚀 Starting deployment process..."
+
+echo "🧹 Cleaning previous build artifacts..."
+rm -f deployment-package.zip
+rm -rf dist
+
+echo "📦 Installing dependencies..."
+npm install
+
 echo "Compiling TypeScript and building deployment package..."
 npm run build
 

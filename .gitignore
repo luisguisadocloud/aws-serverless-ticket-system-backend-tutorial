@@ -2,3 +2,5 @@ node_modules
 
 deployment-package.zip
 .vscode/
+
+dist/

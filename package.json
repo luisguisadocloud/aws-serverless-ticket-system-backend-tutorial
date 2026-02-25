@@ -5,15 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "zip": "zip -r deployment-package.zip dist node_modules"
+    "build": "esbuild src/handler/index.ts --bundle --platform=node --target=node22 --outfile=dist/handler/index.js --sourcemap",
+    "zip": "zip -r deployment-package.zip dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.946.0",
-    "@aws-sdk/lib-dynamodb": "^3.946.0"
+    "@aws-sdk/lib-dynamodb": "^3.946.0",
+    "esbuild": "^0.27.3"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.159",
