@@ -4,3 +4,4 @@ deployment-package.zip
 .vscode/
 
 dist/
+.env
