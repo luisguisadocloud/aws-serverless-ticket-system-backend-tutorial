@@ -1,13 +1,15 @@
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { TicketPriority, TicketStatus, TicketType } from "../domain/enums";
 import { Ticket } from "../domain/ticket";
 import { CreateTicketDto } from "../dtos/create-ticket.dto";
-
-const client = new DynamoDBClient({});
-const docClient = DynamoDBDocumentClient.from(client);
+import { TicketRepository } from "../repositories/ticket-repository";
 
 export class TicketService {
+  private readonly ticketRepository: TicketRepository;
+
+  constructor() {
+    this.ticketRepository = new TicketRepository();
+  }
+
   async createTicket(createTicket: CreateTicketDto): Promise<Ticket> {
     // Lógica de negocio
     const ticket: Ticket = {
@@ -23,15 +25,7 @@ export class TicketService {
       updatedAt: new Date().toISOString(),
     };
 
-    // Lógica de persistencia (infraestructura)
-    const command = new PutCommand({
-      TableName: process.env.DYN_TICKET_TABLE_NAME ?? "dev-tsb-ddb-tickets",
-      Item: ticket
-    });
-
-    const responseDB = await docClient.send(command);
-    console.log(responseDB);
-
+    await this.ticketRepository.create(ticket);
     return ticket;
   }
 }
