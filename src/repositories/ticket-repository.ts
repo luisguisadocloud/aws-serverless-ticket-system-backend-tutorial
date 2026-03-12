@@ -21,4 +21,9 @@ export class TicketRepository {
     const responseDB = await this.docClient.send(command);
     console.log(responseDB);
   }
+
+  // findAll
+  // findById
+  // update
+  // delete
 }
