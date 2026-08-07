@@ -1,8 +1,9 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
 import { Ticket } from "../domain/ticket";
+import { ITicketRepository } from "./ticket-repository.interface";
 
-export class TicketRepository {
+export class DynTicketRepository implements ITicketRepository {
   private readonly docClient: DynamoDBDocumentClient;
   private readonly tableName: string;
 

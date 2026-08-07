@@ -1,13 +1,14 @@
 import { TicketPriority, TicketStatus, TicketType } from "../domain/enums";
 import { Ticket } from "../domain/ticket";
 import { CreateTicketDto } from "../dtos/create-ticket.dto";
-import { TicketRepository } from "../repositories/ticket-repository";
+import { ITicketRepository } from "../repositories/ticket-repository.interface";
+import { ITicketService } from "./ticket-service.interface";
 
-export class TicketService {
-  private readonly ticketRepository: TicketRepository;
+export class TicketService implements ITicketService {
+  private readonly ticketRepository: ITicketRepository;
 
-  constructor() {
-    this.ticketRepository = new TicketRepository();
+  constructor(ticketRepository: ITicketRepository) {
+    this.ticketRepository = ticketRepository;
   }
 
   async createTicket(createTicket: CreateTicketDto): Promise<Ticket> {
